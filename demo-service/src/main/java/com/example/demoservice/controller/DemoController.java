@@ -12,8 +12,23 @@ import java.util.Map;
 @RestController
 public class DemoController {
 
+
     @GetMapping("/demo")
-    public Map<String, Object> hello(HttpServletRequest request) {
+    public Map<String, Object> demoService(HttpServletRequest request) {
+        return getHeaders(request);
+    }
+
+    @GetMapping("/aggregator/service")
+    public Map<String, Object> service1(HttpServletRequest request) {
+        return getHeaders(request);
+    }
+
+    @GetMapping("/aggregator/service1")
+    public String service2() {
+        return "aggregator1";
+    }
+
+    private Map<String, Object> getHeaders(HttpServletRequest request) {
         Enumeration<String> headerNames = request.getHeaderNames();
         Map<String, Object> headers = new HashMap<>();
         while (headerNames.hasMoreElements()) {

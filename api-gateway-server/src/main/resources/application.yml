@@ -24,7 +24,7 @@ spring:
             - id: demo-service
               uri: http://localhost:9081/
               predicates:
-                - Path=/demo-service/**
+                - Path=/demo-service/demo
               filters:
                 - name: JwtValidationFilter
                   args:
@@ -35,6 +35,17 @@ spring:
                     claimToHeaderMap:
                       userId: x-user-id
                       deviceId: x-device-id
+            - id: demo-service-aggregation
+              uri: http://localhost:9081/
+              predicates:
+                - Path=/demo-service/aggregation
+              filters:
+                - name: AggregatorFilter
+                  args:
+                    serviceUrls:
+                      - http://localhost:9081/demo-service/aggregator/service
+                      - http://localhost:9081/demo-service/aggregator/service1
+                      - http://localhost:9082/test-service/test
             - id: test-service
               uri: http://localhost:9082/
               predicates:

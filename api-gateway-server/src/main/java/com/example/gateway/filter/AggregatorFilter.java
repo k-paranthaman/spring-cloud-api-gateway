@@ -45,7 +45,7 @@ public class AggregatorFilter implements GatewayFilterFactory<AggregatorFilter.C
 
             return aggregatedResponses.flatMap(responses -> {
                 // Aggregate as JSON array
-                String aggregatedJson = responses.toString(); // or use a JSON library for better formatting
+                String aggregatedJson = responses.toString();
                 byte[] responseBytes = aggregatedJson.getBytes(StandardCharsets.UTF_8);
                 DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(responseBytes);
                 exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);

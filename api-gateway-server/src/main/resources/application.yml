@@ -1,0 +1,41 @@
+# API Gateway Server Configuration
+server:
+  port: 9080
+  servlet:
+    context-path: /
+
+app-jws:
+  jwk-cache-lifespan: 600000
+  jwk-refresh-time: 60000
+  jwk-url: http://localhost:9083/jws-service/.well-known/jwks.json
+  connect-timeout: 5000
+  read-timeout: 5000
+
+
+
+spring:
+  application:
+    name: api-gateway-server
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: demo-service
+              uri: http://localhost:9081/
+              predicates:
+                - Path=/demo-service/**
+              filters:
+                - name: JwtValidationFilter
+                  args:
+                    tokenHeaderName: x-auth-user
+                    removeHeaders:
+                      - x-auth-user
+                      - postman-token
+                    claimToHeaderMap:
+                      uamid: x-uam-id
+                      deviceId: x-device-id
+            - id: test-service
+              uri: http://localhost:9082/
+              predicates:
+                - Path=/test-service/**

@@ -1,0 +1,10 @@
+server:
+  port: 9083
+  servlet:
+    context-path: /jws-service
+
+spring:
+  application:
+    name: jws-service
+
+

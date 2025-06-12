@@ -1,0 +1,11 @@
+server:
+    port: 9081
+    servlet:
+        context-path: /demo-service
+
+spring:
+    application:
+        name: demo-service
+
+
+

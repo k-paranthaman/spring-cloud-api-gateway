@@ -33,7 +33,7 @@ spring:
                       - x-auth-user
                       - postman-token
                     claimToHeaderMap:
-                      uamid: x-uam-id
+                      userId: x-user-id
                       deviceId: x-device-id
             - id: test-service
               uri: http://localhost:9082/
